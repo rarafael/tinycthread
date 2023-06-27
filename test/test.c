@@ -344,7 +344,7 @@ static void test_thrd_exit(void)
   thrd_t thread;
   int res;
   thrd_create(&thread, test_thrd_exit_func, NULL);
-  assert(thrd_join(thread, &res));
+  assert(!thrd_join(thread, &res));
   assert(res == 2);
 }
 

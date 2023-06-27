@@ -172,10 +172,10 @@ int _tthread_timespec_get(struct timespec *ts, int base);
 /* Function return values */
 enum {
   thrd_success = 0, /**< The requested operation succeeded */
-  thrd_busy    ,/**< The requested operation failed because a tesource requested by a test and return function is already in use */
-  thrd_error   ,/**< The requested operation failed */
-  thrd_nomem   ,/**< The requested operation failed because it was unable to allocate memory */
-  thrd_timedout,/**< The time specified in the call was reached without acquiring the requested resource */
+  thrd_busy    ,    /**< The requested operation failed because a tesource requested by a test and return function is already in use */
+  thrd_error   ,    /**< The requested operation failed */
+  thrd_nomem   ,    /**< The requested operation failed because it was unable to allocate memory */
+  thrd_timedout     /**< The time specified in the call was reached without acquiring the requested resource */
 };
 
 /* Mutex types */
