@@ -741,7 +741,8 @@ int thrd_sleep(const struct timespec *duration, struct timespec *remaining)
 void thrd_yield(void)
 {
 #if defined(_TTHREAD_WIN32_)
-  Sleep(0);
+    /* Patch from <https://github.com/tinycthread/tinycthread/pull/58> */
+  (void)SwitchToThread();
 #else
   sched_yield();
 #endif

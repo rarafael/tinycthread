@@ -150,7 +150,8 @@ int _tthread_timespec_get(struct timespec *ts, int base);
 * @hideinitializer
 */
 
-#if !(defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201102L)) && !defined(_Thread_local)
+/* Patch from <https://github.com/tinycthread/tinycthread/pull/56> */
+#if !(defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201102L) && !defined(__STDC_NO_THREADS__)) && !defined(_Thread_local)
  #if defined(__GNUC__) || defined(__INTEL_COMPILER) || defined(__SUNPRO_CC) || defined(__IBMCPP__)
   #define _Thread_local __thread
  #else
@@ -167,17 +168,22 @@ int _tthread_timespec_get(struct timespec *ts, int base);
 #define TSS_DTOR_ITERATIONS PTHREAD_DESTRUCTOR_ITERATIONS
 #endif
 
+/* Enum Patch conforming to C11 standard from <https://github.com/tinycthread/tinycthread/pull/54> */
 /* Function return values */
-#define thrd_error    0 /**< The requested operation failed */
-#define thrd_success  1 /**< The requested operation succeeded */
-#define thrd_timedout 2 /**< The time specified in the call was reached without acquiring the requested resource */
-#define thrd_busy     3 /**< The requested operation failed because a tesource requested by a test and return function is already in use */
-#define thrd_nomem    4 /**< The requested operation failed because it was unable to allocate memory */
+enum {
+  thrd_success = 0, /**< The requested operation succeeded */
+  thrd_busy    ,/**< The requested operation failed because a tesource requested by a test and return function is already in use */
+  thrd_error   ,/**< The requested operation failed */
+  thrd_nomem   ,/**< The requested operation failed because it was unable to allocate memory */
+  thrd_timedout,/**< The time specified in the call was reached without acquiring the requested resource */
+};
 
 /* Mutex types */
-#define mtx_plain     0
-#define mtx_timed     1
-#define mtx_recursive 2
+enum {
+  mtx_plain     = 0,
+  mtx_timed    ,
+  mtx_recursive,
+};
 
 /* Mutex */
 #if defined(_TTHREAD_WIN32_)
