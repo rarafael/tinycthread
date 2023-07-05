@@ -34,7 +34,7 @@ int HelloThread(void * aArg)
 }
 
 /* This is the main program (i.e. the main thread) */
-int main()
+int main(void)
 {
   /* Start the child thread */
   thrd_t t;

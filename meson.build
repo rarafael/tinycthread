@@ -17,5 +17,12 @@ static_tinycthread = static_library(
   pic: true,
   install: true,
   )
+pkg = import('pkgconfig')
+pkg.generate(
+  static_tinycthread,
+  description: 'Basic threading classes for C',
+  filebase: 'tinycthread',
+  name: 'tinycthread',
+  )
 
 subdir('test')

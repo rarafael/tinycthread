@@ -334,6 +334,8 @@ static void test_mutex_timed(void)
 
 static int test_thrd_exit_func(void* arg)
 {
+  (void)arg;
+
   test_sleep();
   thrd_exit(2);
   return 1;
@@ -610,7 +612,7 @@ const Test unit_tests[] =
   { "thread-specific-storage", test_tss },
   { "mutex-timed", test_mutex_timed },
   { "thread-exit", test_thrd_exit },
-  { NULL, }
+  { NULL, NULL}
 };
 
 static void test_config_print_and_exit(const Test* tests, int argc, char** argv)
