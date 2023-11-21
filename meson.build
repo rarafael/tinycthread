@@ -25,4 +25,8 @@ pkg.generate(
   name: 'tinycthread',
   )
 
+tinycthread_dep = declare_dependency(
+  link_with: static_tinycthread,
+  include_directories: './src/')
+
 subdir('test')
